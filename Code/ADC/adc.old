@@ -1,0 +1,153 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <assert.h> 
+#include <string.h>
+
+#include "ADC.h"
+
+
+volatile unsigned int *control, *status, *data, *led;
+
+void static inline twi_select(unsigned char addr, unsigned char dir) {
+	unsigned int timeout = 0;
+	printf("twi_select enterted\n");
+	*control = START|TWSIEN;        // Send start signal
+	
+	printf("control success");
+
+	usleep(1);
+
+	printf("first while statement entering\n");
+
+	while((*control & IFLG) == 0)
+		if(timeout++ > 10000) {
+			//Timeout occurs
+			printf("timeout has occured\n");
+			*control = STOP|TWSIEN; // Send stop signal
+			exit(-1);
+		}
+	printf("while loop success\n");
+	if((*status != MT_START) && (*status != MT_REP_START)) {
+		//Can't send the start signal!
+		*control = STOP|TWSIEN; // Send stop signal;
+		exit(-1);
+	}
+	
+	printf("if statement finished\n");
+
+	//If you've reached here the start signal was successfully sent.
+	*data = addr | dir;     // Send SLA+W/R
+	usleep(1);
+
+	*control = (*control & ~IFLG) | ACK;
+	usleep(1);
+
+	while((*control & IFLG) == 0) ;
+
+	if((*status != MT_SLA_ACK) && (*status != MR_SLA_ACK)) {
+		//Slave did not ACK select signal
+		*control = STOP|TWSIEN; // Send stop signal
+		exit(-1);
+		
+	}
+	//Slave selected successfully
+}
+
+void static inline twi_write(unsigned char dat) {
+	//Write data
+	*data = dat;
+	usleep(100);
+
+	*control = (*control & ~IFLG) | ACK;
+	usleep(100);
+	while((*control & IFLG) == 0x0);        // Wait for an I2C event
+
+
+	if((*status != ST_DATA_ACK) && (*status != MT_DATA_ACK )) {
+		//Slave did not acknowledge (ACK) data!
+		exit(1);
+	}
+
+	//Slave acknolwedged the data
+}
+
+double adc(int channel){
+	volatile unsigned int *fpga, *sram;
+	unsigned int i;
+	int devmem;
+	unsigned int *twi_regs, *regs;
+	unsigned long int almost;
+	double final;
+	
+
+	printf("adc entered, now opening devmem\n");
+
+	devmem = open("/dev/mem", O_RDWR|O_SYNC);
+	assert(devmem != -1);
+
+	printf("devmem opened. twi_regs.\n");
+
+	twi_regs = (unsigned int *)mmap(0, getpagesize(), PROT_READ|PROT_WRITE, MAP_SHARED, devmem, 0xF1011000);
+
+	printf("opening registry\n");
+
+	regs = (unsigned int *)mmap(0, getpagesize(), PROT_READ|PROT_WRITE, MAP_SHARED, devmem,  0xe8000000);
+
+	printf("setting regs\n");
+
+	led = &regs[GLED];
+        control = &twi_regs[CONTROL];
+        data = &twi_regs[DATA];
+        status = &twi_regs[STATUS];
+
+	printf("opening FPGA\n");
+
+	fpga = (unsigned int *)mmap(0, 0x1004, PROT_READ|PROT_WRITE, MAP_SHARED, devmem, 0xE8100000);
+       	sram = &fpga[SRAM];
+
+	printf("i2c stuff\n");
+
+	twi_select(AVR_ADDR, WRITE);
+
+	printf("twi_select success\n");
+
+	twi_write(channel | 0x40);
+
+	printf("twi_write success\n");
+
+	*control = STOP|TWSIEN; // Send stop signal
+
+//EWD: Implement this in a more elegant way. That is write out all FF's then print values as they are available.
+//2KSPS => a new sample is available every 500uS
+usleep(1500000);
+
+	for(i=0;i<1024;i++) {
+		printf("0x%x\n", sram[i]);
+	}
+	printf("0x%x\n", sram[1023]);
+	printf("int = %d\n", sram[1023]);
+	
+	almost = sram[1023];
+
+	printf("almost =%x\n", almost);
+
+//	printf("Print Statement Test = %10.10f\n", almost*.000000012);
+
+	almost = almost & 0x00000FFF;
+
+	printf("almost = %x\n", almost);
+
+	final = (double) almost * .000000012;
+		
+//	printf("Final with assigment = %10.10f\n", final);	
+
+	return final;	
+
+}
+
+
+

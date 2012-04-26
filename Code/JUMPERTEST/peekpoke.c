@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include "peekpoke.h"
+
+/*
+  Features that the old peekXX/pokeXX did not have:
+  1. Support for 8/16/32 bit READ/WRITE in one function
+  2. Support for decimal and binary values
+  3. The value return is returned (to become the status code)
+ */
+
+/** Converted to a function by Mike Ciaraldi 2008/07/02
+ * @param dowrite false (zero) for peek, true (non-zero) for poke
+ * @param bits Number of bits to read or write (8, 16, or 32)
+ * @addr Address to access
+ * @param intval Value to write (poke only)
+ * @return For peek, value read. For poke, 0. -1 for error.
+ */
+
+long peekpoke(int dowrite, int bits, void* addr, unsigned int intval) {
+  unsigned long page, addr2;
+  int fd;
+  unsigned char *start;
+  unsigned char *chardat, charval;
+  volatile unsigned short *shortdat, shortval;
+  unsigned int *intdat;
+
+  addr2 = (unsigned long) addr; // Convert to long int for bit manipulation
+
+  if (bits != 8 && bits != 16 && bits != 32) {
+    fprintf(stderr,"Error: BIT_WIDTH must be 8, 16, or 32\n");
+    return -1;
+  }
+  
+  fd = open("/dev/mem", O_RDWR|O_SYNC);
+  if (fd == -1) {
+    perror("open(/dev/mem):");
+    return -1;
+  }
+  page = addr2 & 0xfffff000;
+
+  start = mmap(0, getpagesize(), PROT_READ|PROT_WRITE, MAP_SHARED, fd, page); //has to be ran as root
+  if (start == MAP_FAILED) {
+    perror("mmap:");
+    close(fd);
+    return -1;
+  }
+  
+  if (bits == 8) {
+    charval = (unsigned char)intval;
+    chardat = start + (addr2 & 0xfff);
+    if (dowrite) {
+      *chardat = charval;
+      asm volatile ("nop;nop;nop;nop;nop;");
+    }
+    intval = (unsigned int)*chardat;
+  } else if (bits == 16) {
+    shortval = (unsigned short)intval;
+    shortdat = (unsigned short *)(start + (addr2 & 0xfff));
+    if (dowrite) {
+      *shortdat = shortval;
+      asm volatile ("nop;nop;nop;nop;nop;");
+    }
+    intval = (unsigned int)*shortdat;
+  } else if (bits == 32) {
+    intdat = (unsigned int *)(start + (addr2 & 0xfff));
+    if (dowrite) {
+      *intdat = intval;
+      asm volatile ("nop;nop;nop;nop;nop;");
+    }
+    intval = *intdat;
+  }
+  
+  //printf("0x%X\n", intval);
+
+  // fprintf(stdout, "0x%X\n", intval);
+  // fflush(stdout);
+
+  // Clean up
+  munmap(start, getpagesize());
+  close(fd);
+
+  if (dowrite) return 0;
+  else return intval;
+  
+  //return EXIT_SUCCESS;
+}
+
+// Wrapper functions
+long peek(int bits, void* addr) {
+  return peekpoke(0, bits, addr, 0);
+}
+
+long poke(int bits, void* addr, unsigned int intval) {
+  return peekpoke(1, bits, addr, intval);
+}
+
+long peek8(void* addr) {
+  return peekpoke(0, 8, addr, 0);
+}
+
+long poke8(void* addr, unsigned int intval) {
+  return peekpoke(1, 8, addr, intval);
+}
+
+long peek16(void* addr) {
+  return peekpoke(0, 16, addr, 0);
+}
+
+long poke16(void* addr, unsigned int intval) {
+  printf("peekpoke writeval = %x", intval);
+  return peekpoke(1, 16, addr, intval);
+}
+
+long peek32(void* addr) {
+  return peekpoke(0, 32, addr, 0);
+}
+
+long poke32(void* addr, unsigned int intval) {
+  return peekpoke(1, 32, addr, intval);
+}
+
+
+
+
+  // long peekpoke(int dowrite, int bits, void* addr, unsigned int intval) {

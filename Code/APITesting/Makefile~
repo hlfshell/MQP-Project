@@ -1,0 +1,58 @@
+all: motorTest servoTest DIOTest ADCTest
+
+
+#MOTOR
+motorTest: motorTest.o motor.o
+	gcc -g motorTest.o motor.o -o motorTest
+
+motorTest.o: motorTest.c SERIAL/serialHandler.h
+	gcc -g -c motorTest.c
+
+motor.o: MOTOR/motor.c
+	gcc -g -c MOTOR/motor.c
+
+
+#SERVO
+servoTest: servoTest.o servo.o
+	gcc -g servoTest.o servo.o -o servoTest
+
+servoTest.o: servoTest.c SERIAL/serialHandler.h
+	gcc -g -c servoTest.c
+
+servo.o: SERVO/servo.c SERIAL/serialHandler.h
+	gcc -g -c SERVO/servo.c
+
+
+#DIO
+DIOTest: DIOTest.o peekpoke.o DIhandler.o DOhandler.o getBit.o
+	gcc -g DIOTest.o peekpoke.o DIhandler.o DOhandler.o getBit.o -o DIOTest
+
+DIOTest.o: DIO/DIOTest.c DIO/peekpoke.h
+	gcc -g -c DIO/DIOTest.c
+
+peekpoke.o: DIO/peekpoke.c DIO/peekpoke.h
+	gcc -g -c DIO/peekpoke.c
+
+DIhandler.o: DIO/DIhandler.c DIO/peekpoke.h
+	gcc -g -c DIO/DIhandler.c
+
+DOhandler.o: DIO/DOhandler.c DIO/peekpoke.h
+	gcc -g -c DIO/DOhandler.c
+
+getBit.o: DIO/getBit.c
+	gcc -g -c DIO/getBit.c
+
+
+#ADC
+ADCTest: ADCTest.o adc.o
+	gcc -g ADCTest.o adc.o -o ADCTest
+
+adctest.o: adctest.c ADC.h adc.c
+	gcc -g -c adctest.c
+
+adc.o: adc.c ADC.h
+	gcc -g -c adc.c
+
+#CLEAN
+clean:
+	rm -f motorTest servoTest DIOTest ADCTest *.o a.out

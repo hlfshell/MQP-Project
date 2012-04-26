@@ -1,0 +1,135 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Comment" 2 18 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 }
+{CSTYLE "" -1 256 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 }{CSTYLE "" -1 
+257 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 }{CSTYLE "" -1 258 "" 0 1 0 0 
+0 0 0 1 0 0 0 0 0 0 0 1 }{CSTYLE "" -1 259 "" 0 1 0 0 0 0 0 1 0 0 0 0 
+0 0 0 1 }{CSTYLE "" -1 260 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 }
+{CSTYLE "" -1 261 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 }{CSTYLE "" -1 
+262 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 }{CSTYLE "" -1 263 "" 0 1 0 0 
+0 0 0 1 0 0 0 0 0 0 0 1 }{CSTYLE "" -1 264 "" 0 1 0 0 0 0 0 1 0 0 0 0 
+0 0 0 1 }{CSTYLE "" -1 265 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 }
+{CSTYLE "" -1 266 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 }{CSTYLE "" -1 
+267 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 }{CSTYLE "" -1 268 "" 0 1 0 0 
+0 0 0 1 0 0 0 0 0 0 0 0 }{CSTYLE "" -1 269 "" 0 1 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 }{CSTYLE "" -1 270 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 }
+{CSTYLE "" -1 271 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 }{CSTYLE "" -1 
+272 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 }{CSTYLE "" -1 274 "" 0 1 0 0 
+0 0 0 1 0 0 0 0 0 0 0 0 }{CSTYLE "" -1 275 "" 0 1 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 }{CSTYLE "" -1 276 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 }
+{CSTYLE "" -1 277 "" 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 }{PSTYLE "Normal
+" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }1 
+1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Heading 1" -1 3 1 {CSTYLE "" -1 
+-1 "Times" 1 18 0 0 0 1 2 1 2 2 2 2 1 1 1 1 }1 1 0 0 6 6 1 0 1 0 2 2 
+0 1 }{PSTYLE "Title" -1 18 1 {CSTYLE "" -1 -1 "Times" 1 18 0 0 0 1 2 
+1 1 2 2 2 1 1 1 1 }3 1 0 0 12 12 1 0 1 0 2 2 19 1 }{PSTYLE "Author" 
+-1 19 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 
+1 0 0 8 8 1 0 1 0 2 2 0 1 }{PSTYLE "" 0 256 1 {CSTYLE "" -1 -1 "" 0 1 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 }3 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }}
+{SECT 0 {PARA 18 "" 0 "" {TEXT -1 62 "Partial derivatives, directional
+ derivatives, and the gradient" }}{PARA 19 "" 0 "" {TEXT -1 5 "names" 
+}}{PARA 256 "" 0 "" {TEXT -1 7 "section" }}{SECT 1 {PARA 3 "" 0 "" 
+{TEXT -1 20 "Loading the packages" }}{EXCHG {PARA 0 "" 0 "" {TEXT -1 
+171 "First, we load the two Maple packages we will be using. Using a c
+olon (:) instead of a semi-colon (;) at the end of the command just su
+ppresses the output of the command. " }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 13 "with(linalg):" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 12 "with
+(plots):" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{SECT 1 
+{PARA 3 "" 0 "" {TEXT -1 13 "Contour plots" }}{EXCHG {PARA 0 "" 0 "" 
+{TEXT -1 12 "Part of the " }{TEXT 274 5 "plots" }{TEXT -1 16 " package
+ is the " }{TEXT 275 11 "contourplot" }{TEXT -1 73 " command, for prod
+ucing contour plots. The syntax is the same as for the " }{TEXT 276 6 
+"plot3d" }{TEXT -1 35 " command. Here is a simple example." }}{PARA 0 
+"> " 0 "" {MPLTEXT 1 0 37 "contourplot(x^2-y^2,x=-2..2,y=-2..2);" }}}
+{PARA 0 "" 0 "" {TEXT -1 117 "By default, the contourplot command prod
+uces contours for ten values of z. You can change this behavior by usi
+ng the " }{TEXT 277 9 "contours " }{TEXT -1 257 "option by telling Map
+le how many contours to plot or specifying specific z values for which
+ contours to plot. The commands below shows how to change the number o
+f contours and also how to produce contours for specific values of z b
+y using a list of values. " }}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 
+49 "contourplot(x^2-y^2,x=-2..2,y=-2..2,contours=15);" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 57 "contourplot(x^2-y^2,x=-2..2,y=-2..2
+,contours=[-1,0,1,2]);" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" 
+}}}}{SECT 1 {PARA 3 "" 0 "" {TEXT -1 34 "Directional derivatives - met
+hod 1" }}{EXCHG {PARA 0 "" 0 "" {TEXT -1 110 "This command shows one m
+ethod for computing directional derivatives. It computes the direction
+al derivatve of " }{XPPEDIT 18 0 "f" "6#%\"fG" }{TEXT -1 53 " at the p
+oint (1,-1) in the direction of the vector (" }{XPPEDIT 18 0 "cos(Pi/4
+),sin(Pi/4)" "6$-%$cosG6#*&%#PiG\"\"\"\"\"%!\"\"-%$sinG6#*&F'F(F)F*" }
+{TEXT -1 54 "). Note that if you know the direction of your vector " }
+{TEXT 256 1 "u" }{TEXT -1 136 ", it is  usually convenient to use trig
+ functions for the components. Otherwise, you have to make sure that t
+he vector is a unit vector." }}{PARA 0 "" 0 "" {TEXT -1 0 "" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 50 "subs(t=0,diff(f(1+t*cos(Pi/4),-1+t*sin(Pi
+/4)),t));" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{SECT 1 
+{PARA 3 "" 0 "" {TEXT -1 9 "Gradients" }}{EXCHG {PARA 0 "" 0 "" {TEXT 
+-1 30 "To compute gradients, use the " }{TEXT 257 4 "grad" }{TEXT -1 
+18 " command from the " }{TEXT 258 6 "linalg" }{TEXT -1 31 " package. \+
+The second argument, " }{TEXT 268 5 "[x,y]" }{TEXT -1 76 ",  tells Map
+le that the first component should be the partial derivative of " }
+{TEXT 269 1 "g" }{TEXT -1 17 " with respect to " }{TEXT 270 1 "x" }
+{TEXT -1 62 " and the second component should be the partial derivativ
+e of " }{TEXT 271 1 "g" }{TEXT -1 18 " with respect to  " }{TEXT 272 
+1 "y" }{TEXT -1 2 ". " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 19 "grad(g(x,y
+),[x,y]);" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 112 "Switching the order
+ of the variables in the second argument gives an answer that is not c
+orrect, so don't do it!" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 19 "grad(g(x
+,y),[y,x]);" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 68 "To evaluate the gr
+adient at a specific point, it is best to use the " }{TEXT 259 4 "subs
+" }{TEXT -1 26 " command, as shown below. " }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 36 "subs(\{x=1,y=-1\},grad(f(x,y),[x,y]));" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{SECT 1 {PARA 3 "" 0 "" {TEXT 
+-1 35 "Directional derivatives  - method 2" }}{EXCHG {PARA 0 "" 0 "" 
+{TEXT -1 90 "Here is a way to compute the same directional derivative \+
+we computed above, but using the " }{TEXT 260 4 "grad" }{TEXT -1 31 " \+
+command.  Note the use of the " }{TEXT 261 9 "innerprod" }{TEXT -1 59 
+" command from an earlier lab.  This command is also in the " }{TEXT 
+262 6 "linalg" }{TEXT -1 9 " package." }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 69 "subs(\{x=1,y=-1\},innerprod(grad(f(x,y),[x,y]),[cos(Pi/4),sin(Pi
+/4)]));" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{SECT 1 
+{PARA 3 "" 0 "" {TEXT -1 24 "Plotting gradient fields" }}{EXCHG {PARA 
+0 "" 0 "" {TEXT -1 4 "The " }{TEXT 263 9 "fieldplot" }{TEXT -1 161 " c
+ommand from the plots package can be used to plot the gradient field. \+
+The length of the arrows is proportional to the magnitude of the gradi
+ent at that point. " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 47 "fieldplot(gr
+ad(x^2-y^2,[x,y]),x=-3..3,y=-3..3);" }}}{EXCHG {PARA 0 "" 0 "" {TEXT 
+-1 66 "I don't like the default values for some of the parameters to t
+he " }{TEXT 264 9 "fieldplot" }{TEXT -1 119 " command. Here are some v
+alues that work better for me. For more information on the options, se
+e the help page for the " }{TEXT 265 9 "fieldplot" }{TEXT -1 10 " comm
+and. " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 72 "fieldplot(grad(x^2-y^2,[x,
+y]),x=-3..3,y=-3..3,arrows=SLIM,grid=[10,10]);" }}}{EXCHG {PARA 0 "" 
+0 "" {TEXT -1 213 "If the function changes rapidly, the arrows where t
+he magnitude of the gradient is small can be so short that they are ha
+rd to interpret. The best solution to this problem is to zoom in on th
+e regions of interest." }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 71 "fieldplot
+(grad(f(x,y),[x,y]),x=-2..2,y=-2..2,arrows=SLIM,grid=[10,10]);" }}}
+{EXCHG {PARA 0 "" 0 "" {TEXT -1 73 "In this command, we've zoomed in b
+y changing the plot ranges for x and y." }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 71 "fieldplot(grad(f(x,y),[x,y]),x=-1..1,y=-1..1,arrows=SLIM,grid=
+[10,10]);" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{SECT 1 
+{PARA 3 "" 0 "" {TEXT -1 57 "Plotting contours and the gradient field \+
+on the same plot" }}{EXCHG {PARA 0 "" 0 "" {TEXT -1 173 "This last exa
+mple demonstrates a way to plot contours and the gradient field on the
+ same plot. Essentially, you create the two plots separately with labe
+ls and then use the " }{TEXT 266 7 "display" }{TEXT -1 18 " command fr
+om the " }{TEXT 267 5 "plots" }{TEXT -1 38 " package to superimpose th
+e two plots." }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 236 "Here is the comm
+and for plotting the gradient field. Note that the command is ended wi
+th a colon (:) instead of the usual semi-colon (;). This suppresses th
+e output of the command and is crucial to preventing clutter in your w
+orksheet. " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 78 "p1 := fieldplot(grad(
+x^2+y^2,[x,y]),x=-2..2,y=-2..2,arrows=SLIM,grid=[10,10]):" }}}{EXCHG 
+{PARA 0 "" 0 "" {TEXT -1 26 "Here is the contour plot. " }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 43 "p2 := contourplot(x^2+y^2,x=-2..2,y=-2..2):" }
+}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 192 "The display command is used to \+
+show more than one plot simultaneously.  This plot demonstrates the re
+sult that the gradient at a point is perpendicular to the contour thro
+ugh the same point. s" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "display(\{
+p1,p2\});" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{MARK "2 0" 7 }
+{VIEWOPTS 0 0 0 1 1 1803 1 1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }
